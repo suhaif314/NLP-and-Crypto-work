@@ -1,0 +1,44 @@
+import random
+import string
+from VigenereCipher import vigenere_decrypt
+
+def generate_random_word(length):
+    alphabet = list(string.ascii_uppercase)
+    return ''.join(random.choice(alphabet) for _ in range(length))
+
+def generate_words_from_string(s):
+    words = s.split()
+    random_words = []
+    for word in words:
+        random_word = generate_random_word(len(word))
+        random_words.append(random_word)
+    #print(random_words)
+    return random_words
+
+s = "ULP WRGC XEJ BS VGIMPDI OLF MXXSNWJFWM MN XP FPTMZZF ME QW KSTWTJPZ"
+# random_words = generate_words_from_string(s)
+# print(random_words)
+
+N = 1000000
+for i in range(N):
+    
+    random_words = generate_words_from_string(s)
+    #print(random_words)
+
+    keyword_found = False
+    for word in random_words:
+        keyword = word
+        Final_message = vigenere_decrypt(s, keyword)
+        
+        fnal_word = Final_message.split(" ")
+        #print(fnal_word)
+        
+        for wod in fnal_word :
+            #print(wod)
+            if wod  == "BELIEVE" :
+                keyword_found = True
+                print(Final_message,keyword)
+                break
+
+        if keyword_found == True :
+            break
